@@ -11,9 +11,12 @@ document.addEventListener('DOMContentLoaded', () => {
         search = Object.fromEntries(formData.entries()).repo;
         let counterSecondResult = 0;
 
+
+        // getData(search);
+
+
         getData(search)
             .then((data) => {
-                Clean();
                 data.forEach(item => {
 
                     if (searchResult(item.name, search)) {
@@ -37,6 +40,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (document.querySelector('.result').children.length == 0) {
                     renderNoResult();
                 }
+                if (document.querySelector('.second-result__wrap').children.length == 0) {
+                    renderSecondNoResult();
+                } else {
+                    document.querySelector('.second-result').classList.add('active')
+                }
+
 
 
             });
@@ -50,6 +59,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function getData(srch) {
         const request = await fetch(`https://api.github.com/search/repositories?q=${srch}`);
+        Clean();
+
+
+        if (!request.ok) {
+
+            renderEror(request.status);
+            throw new Error(request.status);
+        }
+
         const data = await request.json();
 
         return data.items;
@@ -179,7 +197,31 @@ document.addEventListener('DOMContentLoaded', () => {
             `
             <div class="no-result">
                 <h2>К сожелению ничего не найдено</h2>
-                <p>попробуйте поискать нужный вам результат в разделе "похожих"</p>
+            </div>
+             `;
+        document.querySelector('.result').insertAdjacentHTML('beforeend', item);
+
+    }
+
+    function renderEror(statusCode) {
+
+        const item =
+            `
+            <div class="no-result">
+                <h2>Что то пошло не так.....</h2>
+                <p>response status = ${statusCode}</p>
+            </div>
+             `;
+        document.querySelector('.result').insertAdjacentHTML('beforeend', item);
+
+    }
+
+    function renderSecondNoResult() {
+
+        const item =
+            `
+            <div class="no-result">
+                <h2>Даже похожих не нашлось :(</h2>
             </div>
              `;
         document.querySelector('.result').insertAdjacentHTML('beforeend', item);
@@ -192,6 +234,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const resultChildren = Array.from(document.querySelector('.result').children);
         const secResultChildren = Array.from(document.querySelector('.second-result__wrap').children);
+        document.querySelector('.second-result').classList.remove('active')
 
         resultChildren.forEach(item => {
             item.remove();

@@ -60,6 +60,14 @@ form {
     gap: 20px;
 }
 
+.second-result {
+    display: none;
+}
+
+.second-result.active {
+    display: block;
+}
+
 .second-result,
 .second-result__wrap {
     margin-top: 50px;
@@ -130,6 +138,7 @@ form {
 }
 
 .rep-owner {
+    word-break: break-all;
     font-size: 18px;
     display: block;
     text-align: center;
