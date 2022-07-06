@@ -12,15 +12,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
         getData(search)
             .then((data) => {
-
+                Clean();
                 data.forEach(item => {
-                    console.log(item)
-                    new repo(item).renderRepo();
+
+                    if (item.name == search) { new repo(item).renderRepo(); }
                     // console.log(item.name, item['html_url'], item.owner['avatar_url'], item.owner['login'], item['created_at'], item['watchers_count'], item['forks_count']);
                     // renderRepo();
                 });
 
-            });
+            })
+            .then(() => {
+
+                if (document.querySelector('.result').children.length == 0) {
+                    renderNoResult();
+                }
+                // console.log(document.querySelector('.result').children.length)
+            })
+            // if (document.querySelector('.result').children.length == 0) {
+            //     renderNoResult();
+            // }
 
 
 
@@ -55,12 +65,14 @@ document.addEventListener('DOMContentLoaded', () => {
         //отрисовка  на стр
         renderRepo() {
 
+            const date = this.date.substring(0, 10);
+
             const item =
                 `
             <div class="item">
 
                 <h4>
-                    <a class="rep-name" href="${this.url}">${this.name}</a>
+                    <a class="rep-name" target="_blank" href="${this.url}">${this.name}</a>
                 </h4>
 
                 <img class="rep-img item__img" src="${this.avatar}" alt="avatar">
@@ -69,14 +81,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     <div class="item__owner-login">
                         <p>Логин владельца: </p>
-                        <a class="rep-owner" href="${this.ownerUrl}">${this.login}</a>
+                        <a class="rep-owner" target="_blank" href="${this.ownerUrl}">${this.login}</a>
                     </div>
 
                     <div class="item__search-data">
 
                         <p>Создан: </p>
                         <span class="rep-date">
-                            ${this.date}
+                            ${date}
                         </span>
 
                     </div>
@@ -124,9 +136,31 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
+    function renderNoResult() {
+
+        const item =
+            `
+            <div class="no-result">
+                <h2>К сожелению ничего не найдено</h2>
+                <p>попробуйте поискать нужный вам результат в разделе "похожих"</p>
+            </div>
+             `;
+        document.querySelector('.result').insertAdjacentHTML('beforeend', item);
+
+    }
 
 
 
+    function Clean() {
+
+        const children = Array.from(document.querySelector('.result').children);
+
+        children.forEach(item => {
+            item.remove();
+        });
+
+
+    }
 
 
 
