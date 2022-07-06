@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             })
             .then(() => {
-
+                e.target.reset();
                 if (document.querySelector('.result').children.length == 0) {
                     renderNoResult();
                 }
@@ -49,6 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
             });
+
 
 
 
