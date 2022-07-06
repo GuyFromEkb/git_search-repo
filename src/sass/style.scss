@@ -1,0 +1,94 @@
+@import 'libs/bootstrap-reboot.min';
+* {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: gray;
+}
+
+.container {
+    padding-top: 20px;
+    max-width: 1050px;
+    margin: 0 auto;
+}
+
+button {
+    outline: none!important;
+    transition-duration: .2s;
+    border: none;
+    &:active {
+        transform: scale(1.02)
+    }
+}
+
+h1 {
+    text-align: center;
+}
+
+.result {
+    margin-top: 40px;
+}
+
+form {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    input,
+    button {
+        border: none;
+        border-radius: 8px;
+    }
+    button {
+        width: 100px;
+    }
+}
+
+.result {
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.item {
+    cursor: default;
+    border: 1px solid black;
+    border-radius: 12px;
+    padding: 20px 10px;
+    width: 250px;
+    // height: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    // justify-content: center;
+    align-items: center;
+    h4 {
+        font-size: 20px;
+        a {
+            color: #00ffe1
+        }
+    }
+    &__info {
+        p {
+            text-align: center;
+            color: #ffffff;
+        }
+        span {
+            font-weight: 600;
+            display: block;
+            text-align: center;
+        }
+    }
+    &__img {
+        border-radius: 50%;
+        width: 100px;
+        height: auto;
+        // width: 100%;
+        // height: auto;
+        object-fit: cover;
+    }
+}
