@@ -37,14 +37,39 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .then(() => {
                 e.target.reset();
-                if (document.querySelector('.result').children.length == 0) {
-                    renderNoResult();
-                }
-                if (document.querySelector('.second-result__wrap').children.length == 0) {
-                    renderSecondNoResult();
+                //Отображение результата
+                const resultContent = document.querySelector('.result').children.length;
+                const SecondResultContent = document.querySelector('.second-result__wrap').children.length;
+
+
+
+                if (resultContent > 0) {
+                    if (SecondResultContent == 0) {
+
+                    } else {
+                        document.querySelector('.second-result').classList.add('active')
+                    }
+
                 } else {
-                    document.querySelector('.second-result').classList.add('active')
+                    renderNoResult();
+                    if (SecondResultContent == 0) {
+                        renderSecondNoResult();
+                    } else {
+                        document.querySelector('.second-result').classList.add('active')
+                    }
                 }
+
+
+
+                // e.target.reset();
+                // if (document.querySelector('.result').children.length == 0) {
+                //     renderNoResult();
+                // }
+                // if (document.querySelector('.second-result__wrap').children.length == 0) {
+                //     renderSecondNoResult();
+                // } else {
+                //     document.querySelector('.second-result').classList.add('active')
+                // }
 
 
 
