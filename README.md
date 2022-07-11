@@ -1,4 +1,7 @@
+Поиск репозитория, по API github  
+
 [URL](https://guyfromekb.github.io/projects/github-search/index.html)
+
 
 ТЗ:<details> 
 1. Поле для ввода ключевого слова для поиска на гитхаб. По клику обращение к API github.
